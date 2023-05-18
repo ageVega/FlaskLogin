@@ -11,5 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Contraseña:", password);
 
         // Aquí puedes agregar la lógica para iniciar sesión cuando tengas la base de datos y el registro de usuarios implementado
+
+        // Redirige a la página de inventario después de iniciar sesión
+        window.location.href = "/inventario";
     });
 });

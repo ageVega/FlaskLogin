@@ -46,10 +46,10 @@ file_paths = [
     os.path.join(script_dir, os.pardir, 'app.py'),
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'home.html'),
-    os.path.join(script_dir, os.pardir, 'templates', 'inventario.html'),
+    os.path.join(script_dir, os.pardir, 'templates', 'dashboard.html'),
     os.path.join(script_dir, os.pardir, 'static', 'css', 'main.css'),
     os.path.join(script_dir, os.pardir, 'static', 'js', 'main.js'),
-    os.path.join(script_dir, os.pardir, 'static', 'js', 'inventario.js'),
+    os.path.join(script_dir, os.pardir, 'static', 'js', 'dashboard.js'),
 ]
 
 # Especifica la ruta de salida

@@ -57,11 +57,11 @@ $ pip install python-dotenv
 
 $ pip install psycopg2 // Libreria para comunicar nuestra aplicacion python con postgres // Instalar postgres o $ sudo apt install libpq-dev
 
+$ pip install flask_login
+
 $ pip install cryptography
 
 $ pip install gunicorn
 
 $ pip install waitress
-
-$ pip install flask_login
 ```

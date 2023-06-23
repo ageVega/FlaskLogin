@@ -1,6 +1,10 @@
+from api import api_blueprint
 from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
+
+app.register_blueprint(api_blueprint, url_prefix='/api')
+
 
 @app.route('/')
 def index():

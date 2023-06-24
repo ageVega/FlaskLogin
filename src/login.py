@@ -1,4 +1,6 @@
 #login.py
+from .user import User
+from .connection import get_connection, get_nickname_by_id
 from flask import Blueprint
 from flask_login import LoginManager, UserMixin
 
@@ -8,17 +10,6 @@ login_blueprint = Blueprint('login', __name__)
 # Crea una instancia de LoginManager, que maneja el proceso de autenticación de usuarios.
 login_manager = LoginManager()
 
-# Define una clase de modelo para los usuarios
-class User(UserMixin):
-    def __init__(self, id, nickname, password):
-        self.id = id
-        self.nickname = nickname
-        self.password = password
-
-# Ruta para registrar un nuevo usuario
-
-# Ruta para borrar un usuario
-
-# Ruta para obtener todos los usuarios
-
-# Ruta para obtener información del usuario actual
+@login_manager.user_loader  # Esto es un decorador que Flask-Login utiliza para cargar un usuario
+def load_user(user_id):
+    return get_nickname_by_id(user_id)

@@ -1,5 +1,11 @@
 # FlaskLogin
 
+## Ejecutar aplicacion
+
+```bash
+$ python -m src.app
+```
+
 # Instalacion de entorno
 
 ## Version de python

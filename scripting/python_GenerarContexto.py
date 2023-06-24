@@ -44,9 +44,10 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Especifica las rutas de los archivos que quieres leer
 file_paths = [
     os.path.join(script_dir, os.pardir, '.env'),
-    os.path.join(script_dir, os.pardir, 'app.py'),
-    os.path.join(script_dir, os.pardir, 'api.py'),
     os.path.join(script_dir, os.pardir, 'database.sql'),
+    os.path.join(script_dir, os.pardir, 'src', 'app.py'),
+    os.path.join(script_dir, os.pardir, 'src', 'connection.py'),
+    os.path.join(script_dir, os.pardir, 'src', 'login.py'),
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'home.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'dashboard.html'),

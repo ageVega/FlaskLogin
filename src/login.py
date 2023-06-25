@@ -1,8 +1,7 @@
 #login.py
-from .user import User
-from .connection import get_connection, get_nickname_by_id
+from .connection import get_nickname_by_id
 from flask import Blueprint
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager
 
 # Define un Blueprint para la API. Un Blueprint es un conjunto de rutas que pueden ser registradas en una aplicación Flask.
 login_blueprint = Blueprint('login', __name__)

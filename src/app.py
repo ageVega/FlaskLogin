@@ -13,7 +13,7 @@ app.secret_key = environ.get('SECRET_KEY')  # Necesario para flask-login
 app.register_blueprint(login_blueprint, url_prefix='/auth')
 
 login_manager.init_app(app)
-#login_manager.login_view = "auth.login"  # Establece la vista de inicio de sesión
+login_manager.login_view = "auth.login"  # Establece la vista de inicio de sesión
 
 
 @app.route('/')

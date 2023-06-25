@@ -46,6 +46,7 @@ file_paths = [
     os.path.join(script_dir, os.pardir, '.env'),
     os.path.join(script_dir, os.pardir, 'database.sql'),
     os.path.join(script_dir, os.pardir, 'src', 'app.py'),
+    os.path.join(script_dir, os.pardir, 'src', 'user.py'),
     os.path.join(script_dir, os.pardir, 'src', 'connection.py'),
     os.path.join(script_dir, os.pardir, 'src', 'login.py'),
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),

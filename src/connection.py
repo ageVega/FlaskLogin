@@ -3,6 +3,7 @@ from .user import User
 from os import environ
 from dotenv import load_dotenv
 from psycopg2 import connect
+from werkzeug.security import generate_password_hash
 
 # Carga las variables de entorno desde el archivo .env
 load_dotenv()
@@ -19,7 +20,7 @@ def get_connection():
     conn = connect(host=host, port=port, dbname=dbname, user=username, password=password)
     return conn
 
-def get_nickname_by_id(user_id):
+def get_user_by_id(user_id):
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM usuarios WHERE id = %s", (user_id,))
@@ -29,5 +30,24 @@ def get_nickname_by_id(user_id):
 
     if user_data:
         return User(id=user_data[0], nickname=user_data[1], password=user_data[2])
-    
     return None
+
+def get_user_by_nickname(nickname):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM usuarios WHERE nickname = %s", (nickname,))
+    user_data = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if user_data:
+        return User(id=user_data[0], nickname=user_data[1], password=user_data[2])
+    return None
+
+def create_user(nickname, password):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("INSERT INTO usuarios (nickname, password) VALUES (%s, %s)", (nickname, generate_password_hash(password)))
+    conn.commit()
+    cur.close()
+    conn.close()

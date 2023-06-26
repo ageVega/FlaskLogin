@@ -8,6 +8,7 @@
 </div>
 
 <button id="logout-button">Cerrar sesión</button>
+<a href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
 {% endblock %}
 
 {% block extra_js %}

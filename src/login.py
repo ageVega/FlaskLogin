@@ -1,7 +1,7 @@
 # login.py
-from .connection import get_user_by_id, get_user_by_nickname, create_user
+from .connection import get_user_by_id, get_user_by_nickname, create_user, delete_user
 from flask import Blueprint, request, redirect, url_for, render_template
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 # Crea una instancia de LoginManager, que maneja el proceso de autenticación de usuarios.
 login_manager = LoginManager()
@@ -46,3 +46,13 @@ def register():
         else:
             return redirect(url_for('home'))
     return render_template('register.html')
+
+@login_blueprint.route('/delete', methods=['GET', 'POST'])
+@login_required
+def delete_account():
+    if request.method == 'POST':
+        delete_user(current_user.get_id())
+        logout_user()
+        return redirect(url_for('home'))
+    
+    return render_template('delete_account.html')

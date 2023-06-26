@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form id="delete-form" action="{{ url_for('auth.delete_account') }}" method="post">
+    <div>
+        <label for="password">Confirma tu contraseña para eliminar la cuenta:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Eliminar cuenta</button>
+</form>
+{% endblock %}

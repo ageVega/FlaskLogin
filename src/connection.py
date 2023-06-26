@@ -51,3 +51,11 @@ def create_user(nickname, password):
     conn.commit()
     cur.close()
     conn.close()
+
+def delete_user(user_id):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM usuarios WHERE id = %s", (user_id,))
+    conn.commit()
+    cur.close()
+    conn.close()

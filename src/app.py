@@ -1,4 +1,4 @@
-#app.py
+# app.py
 from os import environ
 from .login import login_blueprint, login_manager
 from dotenv import load_dotenv
@@ -28,6 +28,10 @@ def home():
 @login_required  # Solo los usuarios autenticados pueden acceder al tablero
 def dashboard():
     return render_template('dashboard.html', user=current_user)
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 
 if __name__ == '__main__':

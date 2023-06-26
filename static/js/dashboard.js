@@ -1,3 +1,4 @@
+// dashboard.js
 document.addEventListener("DOMContentLoaded", function () {
     const logoutButton = document.getElementById("logout-button");
 

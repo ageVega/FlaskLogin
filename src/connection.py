@@ -1,4 +1,4 @@
-#connection.py
+# connection.py
 from .user import User
 from os import environ
 from dotenv import load_dotenv

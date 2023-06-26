@@ -1,6 +1,6 @@
-#login.py
+# login.py
 from .connection import get_user_by_id, get_user_by_nickname, create_user
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, render_template
 from flask_login import LoginManager, login_user, logout_user, login_required
 
 # Crea una instancia de LoginManager, que maneja el proceso de autenticación de usuarios.
@@ -32,15 +32,17 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@login_blueprint.route('/register', methods=['POST'])
+@login_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
-    nickname = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        nickname = request.form.get('username')
+        password = request.form.get('password')
 
-    user = get_user_by_nickname(nickname)
+        user = get_user_by_nickname(nickname)
 
-    if not user:
-        create_user(nickname, password)
-        return redirect(url_for('home'))
-    else:
-        return redirect(url_for('home'))
+        if not user:
+            create_user(nickname, password)
+            return redirect(url_for('home'))
+        else:
+            return redirect(url_for('home'))
+    return render_template('register.html')

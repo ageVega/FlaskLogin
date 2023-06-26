@@ -29,7 +29,7 @@ def get_user_by_id(user_id):
     conn.close()
 
     if user_data:
-        return User(id=user_data[0], nickname=user_data[1], password=user_data[2])
+        return User(id=user_data[0], nickname=user_data[1], password_hash=user_data[2])
     return None
 
 def get_user_by_nickname(nickname):
@@ -41,7 +41,7 @@ def get_user_by_nickname(nickname):
     conn.close()
 
     if user_data:
-        return User(id=user_data[0], nickname=user_data[1], password=user_data[2])
+        return User(id=user_data[0], nickname=user_data[1], password_hash=user_data[2])
     return None
 
 def create_user(nickname, password):

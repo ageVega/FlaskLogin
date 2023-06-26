@@ -3,7 +3,7 @@ from os import environ
 from .login import login_blueprint, login_manager
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 load_dotenv()  # Carga las variables de entorno desde .env
 
@@ -27,7 +27,7 @@ def home():
 @app.route('/dashboard')
 @login_required  # Solo los usuarios autenticados pueden acceder al tablero
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', user=current_user)
 
 
 if __name__ == '__main__':

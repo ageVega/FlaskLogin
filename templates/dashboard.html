@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Has iniciado sesion como {{ user.nickname }}</h1>
-    <h2>Tu ID es: {{ user.id }}</h2>
+<div id="welcome-message">
+    <h1>Bienvenido, <span>{{ user.nickname }}</span></h1>
+    <h2>Tu ID es: <span>{{ user.id }}</span></h2>
+</div>
 
-    <button id="logout-button">Cerrar sesión</button>
+<button id="logout-button">Cerrar sesión</button>
 {% endblock %}
 
 {% block extra_js %}

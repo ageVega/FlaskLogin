@@ -52,6 +52,7 @@ file_paths = [
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'home.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'dashboard.html'),
+    os.path.join(script_dir, os.pardir, 'templates', 'login.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'register.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'delete_account.html'),
     os.path.join(script_dir, os.pardir, 'static', 'js', 'home.js'),

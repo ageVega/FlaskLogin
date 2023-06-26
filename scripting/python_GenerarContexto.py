@@ -52,9 +52,9 @@ file_paths = [
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'home.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'dashboard.html'),
-    os.path.join(script_dir, os.pardir, 'static', 'css', 'main.css'),
-    os.path.join(script_dir, os.pardir, 'static', 'js', 'main.js'),
+    os.path.join(script_dir, os.pardir, 'static', 'js', 'home.js'),
     os.path.join(script_dir, os.pardir, 'static', 'js', 'dashboard.js'),
+    os.path.join(script_dir, os.pardir, 'static', 'css', 'main.css'),
 ]
 
 # Especifica la ruta de salida

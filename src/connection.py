@@ -59,3 +59,4 @@ def delete_user(user_id):
     conn.commit()
     cur.close()
     conn.close()
+    

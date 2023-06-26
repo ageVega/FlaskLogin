@@ -2,13 +2,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="welcome-message">
+<div class="container" id="welcome-message">
     <h1>Bienvenido, <span>{{ user.nickname }}</span></h1>
     <h2>Tu ID es: <span>{{ user.id }}</span></h2>
+    <div class="button-container">
+        <a class="button" id="logout-button">Cerrar sesión</a>
+        <a class="button" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
+    </div>
 </div>
-
-<button id="logout-button">Cerrar sesión</button>
-<a href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
 {% endblock %}
 
 {% block extra_js %}

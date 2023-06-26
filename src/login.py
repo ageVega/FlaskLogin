@@ -13,18 +13,20 @@ def load_user(user_id):
 # Define un Blueprint para la API. Un Blueprint es un conjunto de rutas que pueden ser registradas en una aplicación Flask.
 user_management_blueprint = Blueprint('auth', __name__)
 
-@user_management_blueprint.route('/login', methods=['POST'])
+@user_management_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    nickname = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        nickname = request.form.get('username')
+        password = request.form.get('password')
 
-    user = get_user_by_nickname(nickname)
+        user = get_user_by_nickname(nickname)
 
-    if user and user.check_password(password):
-        login_user(user)
-        return redirect(url_for('dashboard'))
-    else:
-        return redirect(url_for('home'))
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('dashboard'))
+        else:
+            return redirect(url_for('home'))
+    return render_template('login.html')
 
 @user_management_blueprint.route('/logout')
 @login_required

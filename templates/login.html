@@ -1,13 +1,13 @@
-<!-- register.html -->
+<!-- login.html -->
 {% extends 'base.html' %}
 
 {% block content %}
 <div class="container">
     <div class="button-container">
-        <p>¿Ya tienes una cuenta? <a class="button" href="{{ url_for('auth.login') }}">Inicia sesión aquí</a></p>
+        <p>¿No tienes una cuenta? <a class="button" href="{{ url_for('auth.register') }}">Regístrate aquí</a></p>
     </div>
-    <h1>Registrarse</h1>
-    <form id="register-form" action="{{ url_for('auth.register') }}" method="post">
+    <h1>Iniciar sesión</h1>
+    <form id="login-form" action="{{ url_for('auth.login') }}" method="post">
         <div>
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required>
@@ -18,7 +18,7 @@
         </div>
         <div class="button-container">
             <a class="button common-button" href="{{ url_for('home') }}">Volver</a>
-            <button type="submit" class="button common-button">Registrarse</button>
+            <button type="submit" class="button common-button">Iniciar sesión</button>
         </div>
     </form>
 </div>

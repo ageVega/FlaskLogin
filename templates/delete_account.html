@@ -1,3 +1,4 @@
+<!-- delete_account.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,4 +9,5 @@
     </div>
     <button type="submit">Eliminar cuenta</button>
 </form>
+<p>¿Cambiaste de opinión? <a href="{{ url_for('dashboard') }}">Volver al panel de control</a></p>
 {% endblock %}

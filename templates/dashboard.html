@@ -1,13 +1,15 @@
+<!-- dashboard.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Inventario</h1>
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
-    <button id="logout-button">Cerrar sesión</button>
+<div class="container" id="welcome-message">
+    <h1>Bienvenido, <span>{{ user.nickname }}</span></h1>
+    <h2>Tu ID es: <span>{{ user.id }}</span></h2>
+    <div class="button-container">
+        <a class="button" id="logout-button">Cerrar sesión</a>
+        <a class="button" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}

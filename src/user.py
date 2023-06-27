@@ -2,6 +2,7 @@
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 
+# Definición de la clase usuario
 class User(UserMixin):
     def __init__(self, id, nickname, password_hash):
         self.id = id

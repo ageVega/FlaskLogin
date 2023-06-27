@@ -1,6 +1,6 @@
 # app.py
-from os import environ
 from .login import login_manager, user_management_blueprint
+from os import environ
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for
 from flask_login import login_required, current_user
@@ -8,7 +8,7 @@ from flask_login import login_required, current_user
 load_dotenv()  # Carga las variables de entorno desde .env
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
-app.secret_key = environ.get('SECRET_KEY')  # Necesario para flask-login
+app.secret_key = environ.get('SECRET_KEY')  #  Se utiliza para cifrar las cookies de sesión del usuario, Flask-Login utiliza estas cookies para recordar a los usuarios entre solicitudes.
 
 app.register_blueprint(user_management_blueprint, url_prefix='/auth')
 
@@ -25,13 +25,9 @@ def home():
     return render_template('home.html')
 
 @app.route('/dashboard')
-@login_required  # Solo los usuarios autenticados pueden acceder al tablero
+@login_required  # Solo los usuarios autenticados pueden acceder a esta ruta
 def dashboard():
     return render_template('dashboard.html', user=current_user)
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
 
 
 if __name__ == '__main__':

@@ -2,19 +2,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="button-container">
-        <p>¿Cambiaste de opinión? <a class="button common-button" href="{{ url_for('dashboard') }}">Volver al panel de control</a></p>
+<div class="container mt-5">
+    <div class="d-flex justify-content-center mb-4">
+        <p>¿Cambiaste de opinión? <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Volver al panel de control</a></p>
     </div>
-    <h1>Eliminar cuenta</h1>
-    <p>Por favor, confirma tu contraseña para proceder con la eliminación de la cuenta. Esta acción no se puede deshacer.</p>
+    <h1 class="text-center mb-4">Eliminar cuenta</h1>
+    <p class="text-center">Por favor, confirma tu contraseña para proceder con la eliminación de la cuenta. Esta acción no se puede deshacer.</p>
     <form id="delete-form" action="{{ url_for('auth.delete_account') }}" method="post">
-        <div>
+        <div class="form-group">
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-        </div>        
-        <div class="button-container">
-            <button type="submit" class="button common-button">Confirmar eliminación</button>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
         </div>
     </form>
 </div>

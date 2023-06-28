@@ -2,12 +2,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container" id="welcome-message">
-    <h1>Bienvenido, <span>{{ user.nickname }}</span></h1>
-    <h2>Tu ID es: <span>{{ user.id }}</span></h2>
-    <div class="button-container">
-        <a class="button" id="logout-button">Cerrar sesión</a>
-        <a class="button" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bienvenido, <span class="text-primary">{{ user.nickname }}</span></h1>
+    <h2 class="text-center mb-4">Tu ID es: <span class="text-secondary">{{ user.id }}</span></h2>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-warning mr-2" id="logout-button">Cerrar sesión</a>
+        <a class="btn btn-danger" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
     </div>
 </div>
 {% endblock %}

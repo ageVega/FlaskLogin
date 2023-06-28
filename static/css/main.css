@@ -14,20 +14,6 @@ body {
     padding: 20px;
 }
 
-.common-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    padding: 10px 24px;
-}
-
 .button-container {
     display: flex;
     justify-content: center;
@@ -35,36 +21,8 @@ body {
     margin-top: 20px;
 }
 
-.button, .common-button {
-    padding: 10px 20px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.button {
-    background-color: #008CBA; /* blue */
-}
-
-.button:hover {
-    background-color: #007B9A; /* darker blue */
-}
-
 h1 {
     text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin-bottom: 10px;
-}
-
-input {
-    padding: 5px;
-    font-size: 14px;
 }
 
 #welcome-message {

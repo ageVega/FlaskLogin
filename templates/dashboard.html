@@ -3,11 +3,21 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Bienvenido, <span class="text-primary">{{ user.nickname }}</span></h1>
-    <h2 class="text-center mb-4">Tu ID es: <span class="text-secondary">{{ user.id }}</span></h2>
-    <div class="d-flex justify-content-center">
-        <a class="btn btn-warning mr-2" id="logout-button">Cerrar sesión</a>
-        <a class="btn btn-danger" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Bienvenido, <span class="text-primary">{{ user.nickname }}</span></h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Tu ID es: <span class="text-info">{{ user.id }}</span></h5>
+                    <div class="d-flex justify-content-center mt-4">
+                        <a class="btn btn-danger mr-2" id="logout-button">Cerrar sesión</a>
+                        <a class="btn btn-warning" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

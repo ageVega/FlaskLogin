@@ -47,10 +47,12 @@ def get_user_by_nickname(nickname):
 def create_user(nickname, password):
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO usuarios (nickname, password) VALUES (%s, %s)", (nickname, generate_password_hash(password)))
+    password_hash = generate_password_hash(password)
+    cur.execute("INSERT INTO usuarios (nickname, password) VALUES (%s, %s)", (nickname, password_hash))
     conn.commit()
     cur.close()
     conn.close()
+
 
 def delete_user(user_id):
     conn = get_connection()
@@ -59,4 +61,3 @@ def delete_user(user_id):
     conn.commit()
     cur.close()
     conn.close()
-    

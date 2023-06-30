@@ -28,6 +28,8 @@ pip 22.3.1 from C:\Users\ageve\AppData\Local\Programs\Python\Python310\lib\site-
 sudo apt update
 
 sudo apt install python3-pip
+
+export PYTHONPATH="${PYTHONPATH}:/ruta/a/raiz"
 ```
 
 ## Crear entorno virtual

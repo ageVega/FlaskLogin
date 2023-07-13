@@ -8,7 +8,7 @@ from flask_login import login_required, current_user
 load_dotenv()  # Carga las variables de entorno desde .env
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
-app.secret_key = environ.get('SECRET_KEY')  #  Se utiliza para cifrar las cookies de sesión del usuario, Flask-Login utiliza estas cookies para recordar a los usuarios entre solicitudes.
+app.secret_key = environ.get('SECRET_KEY')  # Se utiliza para cifrar las cookies de sesión del usuario, Flask-Login utiliza estas cookies para recordar a los usuarios entre solicitudes.
 
 app.register_blueprint(user_management_blueprint, url_prefix='/auth')
 
@@ -22,10 +22,12 @@ def index():
 
 @app.route('/home')
 def home():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
     return render_template('home.html')
 
 @app.route('/dashboard')
-@login_required  # Solo los usuarios autenticados pueden acceder a esta ruta
+@login_required
 def dashboard():
     return render_template('dashboard.html', user=current_user)
 

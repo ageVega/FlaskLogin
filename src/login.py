@@ -6,7 +6,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 # Crea una instancia de LoginManager, que maneja el proceso de autenticación de usuarios.
 login_manager = LoginManager()
 
-@login_manager.user_loader  # Esto es un decorador que Flask-Login utiliza para cargar un usuario
+@login_manager.user_loader # Esto es un decorador que flask_login utiliza para cargar un usuario
 def load_user(user_id):
     return get_user_by_id(user_id)
 

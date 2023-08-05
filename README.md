@@ -75,8 +75,6 @@ $ pip install flask_login
 
 $ pip install cryptography
 
-$ pip install gunicorn
-
 $ pip install waitress
 
 ```

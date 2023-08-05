@@ -1,5 +1,5 @@
 # login.py
-from .connection import get_user_by_id, get_user_by_nickname, create_user, delete_user
+from .user import get_user_by_id, get_user_by_nickname, create_user, delete_user
 from flask import Blueprint, request, redirect, url_for, render_template
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 

@@ -69,7 +69,9 @@ $ pip install flask
 
 $ pip install python-dotenv
 
-$ pip install psycopg2  # Librería para comunicar nuestra aplicación Python con PostgreSQL. Debes instalar PostgreSQL o ejecutar el siguiente comando: $ sudo apt install libpq-dev
+# Instalar PostgreSQL o ejecutar el siguiente comando: $ sudo apt install libpq-dev
+
+$ pip install psycopg2
 
 $ pip install flask_login
 

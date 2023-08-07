@@ -26,18 +26,6 @@ def home():
         return redirect(url_for('dashboard'))
     return render_template('home.html')
 
-@app.route('/login')
-def home():
-    if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    return render_template('login.html')
-
-@app.route('/register')
-def home():
-    if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    return render_template('register.html')
-
 @app.route('/dashboard')
 @login_required
 def dashboard():

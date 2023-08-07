@@ -12,35 +12,42 @@ class Admin(UserMixin):
         self.password = password
         
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return check_password_hash(self.password, password)
 
-def get_admin_by_id(admin_id):
+
+# Funcion para conseguir un cursor
+def get_cursor():
     conn = get_connection()
     cur = conn.cursor(cursor_factory=extras.RealDictCursor)
-    cur.execute("SELECT * FROM admins WHERE id = %s", (admin_id,))
-    admin_data = cur.fetchone()
+    return conn, cur
+
+# Funcion para cerrar conexion y cursor
+def close_connection_and_cursor(conn, cur):
     cur.close()
     conn.close()
 
+def get_admin_by_id(admin_id):
+    conn, cur = get_cursor()
+    cur.execute("SELECT * FROM admins WHERE id = %s", (admin_id,))
+    admin_data = cur.fetchone()
+    close_connection_and_cursor(conn, cur)
+
     if admin_data:
-        return Admin(id=admin_data['id'], nickname=admin_data['nickname'], password_hash=admin_data['password'])
+        return Admin(id=admin_data['id'], nickname=admin_data['nickname'], password=admin_data['password'])
     return None
 
 def get_admin_by_nickname(nickname):
-    conn = get_connection()
-    cur = conn.cursor(cursor_factory=extras.RealDictCursor)
+    conn, cur = get_cursor()
     cur.execute("SELECT * FROM admins WHERE nickname = %s", (nickname,))
     admin_data = cur.fetchone()
-    cur.close()
-    conn.close()
+    close_connection_and_cursor(conn, cur)
 
     if admin_data:
-        return Admin(id=admin_data['id'], nickname=admin_data['nickname'], password_hash=admin_data['password'])
+        return Admin(id=admin_data['id'], nickname=admin_data['nickname'], password=admin_data['password'])
     return None
 
 def create_admin(nickname, password):
-    conn = get_connection()
-    cur = conn.cursor()
+    conn, cur = get_cursor()
     password_hash = generate_password_hash(password)
 
     try:
@@ -50,13 +57,11 @@ def create_admin(nickname, password):
         conn.rollback()
         print(f"Error creating admin: {str(e)}")
         return None
-
-    cur.close()
-    conn.close()
+    finally:
+        close_connection_and_cursor(conn, cur)
 
 def delete_admin(admin_id):
-    conn = get_connection()
-    cur = conn.cursor()
+    conn, cur = get_cursor()
 
     try:
         cur.execute("DELETE FROM admins WHERE id = %s", (admin_id,))
@@ -65,6 +70,5 @@ def delete_admin(admin_id):
         conn.rollback()
         print(f"Error deleting admin: {str(e)}")
         return None
-
-    cur.close()
-    conn.close()
+    finally:
+        close_connection_and_cursor(conn, cur)

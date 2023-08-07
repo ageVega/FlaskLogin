@@ -60,6 +60,25 @@ def create_admin(nickname, password):
     finally:
         close_connection_and_cursor(conn, cur)
 
+def update_password(admin_id, new_password):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    hashed_password = generate_password_hash(new_password)
+
+    try:
+        cur.execute('UPDATE admins SET password = %s WHERE id = %s', (hashed_password, admin_id))
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        print("Error al actualizar la contraseña: ", str(e))
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+    return True
+
 def delete_admin(admin_id):
     conn, cur = get_cursor()
 

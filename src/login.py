@@ -16,7 +16,7 @@ admin_blueprint = Blueprint('auth', __name__)
 @admin_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        nickname = request.form.get('username')
+        nickname = request.form.get('nickname')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
@@ -24,11 +24,12 @@ def register():
             flash("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.", "danger")
             return redirect(url_for('auth.register'))
 
-        admin, error = create_admin(nickname, password)
+        error = create_admin(nickname, password)
 
         if error:
             flash(error, "danger")
             return redirect(url_for('auth.register'))
+
 
         return redirect(url_for('home'))
     else:

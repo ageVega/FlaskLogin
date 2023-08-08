@@ -1,27 +1,36 @@
 <!-- dashboard.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2>Bienvenido, <span class="text-primary">{{ user.nickname }}</span></h2>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center">Tu ID es: <span class="text-info">{{ user.id }}</span></h5>
-                    <div class="d-flex justify-content-center mt-4">
-                        <a class="btn btn-danger mr-2" id="logout-button">Cerrar sesión</a>
-                        <a class="btn btn-warning" href="{{ url_for('auth.delete_account') }}">Eliminar cuenta</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_css %}
+    <!-- Fuente de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% block header %}
+    <header class="sticky-header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/config">Configuración</a>
+                </div>
+                <span class="navbar-text">Bienvenido, {{ house_name }}</span>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+        </nav>        
+    </header>
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    
 {% endblock %}

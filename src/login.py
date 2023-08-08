@@ -41,7 +41,7 @@ def login():
         return redirect(url_for('dashboard'))
 
     if request.method == 'POST':
-        nickname = request.form.get('username')
+        nickname = request.form.get('nickname')
         password = request.form.get('password')
 
         admin = get_admin_by_nickname(nickname)
@@ -51,7 +51,7 @@ def login():
             return redirect(url_for('dashboard'))
         else:
             flash('Nickname o contraseña incorrectos.')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
 
     return render_template('login.html')
 

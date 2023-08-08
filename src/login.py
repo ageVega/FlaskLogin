@@ -1,6 +1,6 @@
 # login.py
 from .admin import get_admin_by_id, get_admin_by_nickname, create_admin, delete_admin, update_password
-from flask import Blueprint, request, redirect, url_for, render_template, flash
+from flask import Blueprint, request, redirect, url_for, render_template, flash, session
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -47,6 +47,8 @@ def login():
         admin = get_admin_by_nickname(nickname)
 
         if admin and check_password_hash(admin.password, password):
+            session['admin_id'] = admin.id
+            session['admin_nickname'] = admin.nickname
             login_user(admin)
             return redirect(url_for('dashboard'))
         else:

@@ -53,12 +53,12 @@ def create_admin(nickname, password):
     try:
         cur.execute("INSERT INTO admins (nickname, password) VALUES (%s, %s)", (nickname, password_hash))
         conn.commit()
-        return None  # Return None if everything went well
+        return None
     except Exception as e:
         conn.rollback()
         error_message = f"Error creating admin: {str(e)}"
         print(error_message)
-        return error_message  # Return the error message
+        return error_message
     finally:
         close_connection_and_cursor(conn, cur)
 

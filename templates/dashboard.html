@@ -1,7 +1,7 @@
 <!-- dashboard.html -->
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}{{ admin_nickname }}{% endblock %}
 
 {% block extra_css %}
     <!-- Fuente de Google Fonts -->
@@ -17,7 +17,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link" href="/config">Configuración</a>
                 </div>
-                <span class="navbar-text">Bienvenido, {{ house_name }}</span>
+                <span class="navbar-text">Bienvenido, {{ admin_nickname }}</span>
                 <div class="navbar-nav">
                     <a class="nav-link" href="/auth/logout">Logout</a>
                 </div>
@@ -32,5 +32,8 @@
 
 {% block scripts %}
     {{ super() }}
-    
+    <script>
+        sessionStorage.setItem('admin_id', '{{ session["admin_id"] }}');
+        sessionStorage.setItem('admin_nickname', '{{ session["admin_nickname"] }}');
+    </script>
 {% endblock %}

@@ -24,7 +24,7 @@ def register():
             flash("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.", "danger")
             return redirect(url_for('auth.register'))
 
-        error = create_admin(nickname, password)
+        admin, error = create_admin(nickname, password)
         if error:
             flash(error, "danger")
             return redirect(url_for('auth.register'))

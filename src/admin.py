@@ -47,20 +47,29 @@ def get_admin_by_nickname(nickname):
     return None
 
 def create_admin(nickname, password):
-    conn, cur = get_cursor()
     password_hash = generate_password_hash(password)
 
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=extras.RealDictCursor)
+
+    # Primero verificamos si el nickname ya existe
+    cur.execute('SELECT * FROM admins WHERE nickname = %s', (nickname,))
+    if cur.fetchone():
+        return None, "Lo sentimos, ese nickname ya está cogido :("
+    
     try:
-        cur.execute("INSERT INTO admins (nickname, password) VALUES (%s, %s)", (nickname, password_hash))
+        cur.execute('INSERT INTO admins (nickname, password) VALUES (%s, %s) RETURNING id, nickname, password', 
+                    (nickname, password_hash))
+        admin_data = cur.fetchone()
         conn.commit()
-        return None
     except Exception as e:
         conn.rollback()
-        error_message = f"Error creating admin: {str(e)}"
-        print(error_message)
-        return error_message
-    finally:
-        close_connection_and_cursor(conn, cur)
+        return None, str(e)
+
+    cur.close()
+    conn.close()
+
+    return Admin(admin_data['id'], admin_data['nickname'], admin_data['password']), None
 
 def update_password(admin_id, new_password):
     conn = get_connection()

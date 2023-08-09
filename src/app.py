@@ -38,6 +38,12 @@ def config():
     admin_nickname = session.get('admin_nickname', '11111111')
     return render_template('config.html', admin_nickname=admin_nickname)
 
+@app.route('/change_password')
+@login_required
+def change_password():
+    admin_nickname = session.get('admin_nickname', '11111111')
+    return render_template('change_password.html', admin_nickname=admin_nickname)
+
 
 if __name__ == '__main__':
     env = environ.get('APP_ENV')  

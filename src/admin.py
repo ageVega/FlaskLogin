@@ -44,10 +44,8 @@ def create_admin(nickname, password):
     return Admin(admin_data['id'], admin_data['nickname'], admin_data['password']), None
 
 def update_password(admin_id, new_password):
-    hashed_password = generate_password_hash(new_password)
-
     try:
-        execute_query('UPDATE admins SET password = %s WHERE id = %s', (hashed_password, admin_id))
+        execute_query('UPDATE admins SET password = %s WHERE id = %s', (new_password, admin_id))
 
     except Exception as e:
         print("Error al actualizar la contraseña: ", str(e))
@@ -58,7 +56,7 @@ def update_password(admin_id, new_password):
 def delete_admin(admin_id):
     try:
         execute_query("DELETE FROM admins WHERE id = %s", (admin_id,))
-        
+
     except Exception as e:
         print(f"Error deleting admin: {str(e)}")
         return None

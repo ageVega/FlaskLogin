@@ -44,6 +44,12 @@ def change_password():
     admin_nickname = session.get('admin_nickname', '11111111')
     return render_template('change_password.html', admin_nickname=admin_nickname)
 
+@app.route('/delete_admin')
+@login_required
+def delete_admin():
+    admin_nickname = session.get('admin_nickname', '11111111')
+    return render_template('delete_admin.html', admin_nickname=admin_nickname)
+
 
 if __name__ == '__main__':
     env = environ.get('APP_ENV')  

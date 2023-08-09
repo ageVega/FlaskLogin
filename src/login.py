@@ -16,7 +16,7 @@ admin_blueprint = Blueprint('auth', __name__)
 @admin_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        nickname = request.form.get('nickname')
+        nickname = request.form.get('nickname').lower()
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
@@ -25,11 +25,9 @@ def register():
             return redirect(url_for('auth.register'))
 
         error = create_admin(nickname, password)
-
         if error:
             flash(error, "danger")
             return redirect(url_for('auth.register'))
-
 
         return redirect(url_for('home'))
     else:
@@ -41,21 +39,26 @@ def login():
         return redirect(url_for('dashboard'))
 
     if request.method == 'POST':
-        nickname = request.form.get('nickname')
-        password = request.form.get('password')
-
+        nickname = request.form['nickname'].lower()
+        password = request.form['password']
         admin = get_admin_by_nickname(nickname)
 
-        if admin and check_password_hash(admin.password, password):
-            session['admin_id'] = admin.id
-            session['admin_nickname'] = admin.nickname
-            login_user(admin)
-            return redirect(url_for('dashboard'))
+        if admin:
+            if check_password_hash(admin.password, password):
+                session['admin_id'] = admin.id
+                capitalized_nickname = admin.nickname.capitalize()
+                session['admin_nickname'] = capitalized_nickname
+                login_user(admin)
+                return redirect(url_for('dashboard'))
+            else:
+                flash('Contraseña incorrecta.')
         else:
-            flash('Nickname o contraseña incorrectos.')
-            return redirect(url_for('auth.login'))
+            flash('Este admin no existe.')
 
-    return render_template('login.html')
+        return render_template('login.html')
+    else:
+        return render_template('login.html')
+
 
 @admin_blueprint.route('/logout')
 @login_required

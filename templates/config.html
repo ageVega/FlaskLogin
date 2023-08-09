@@ -1,0 +1,44 @@
+<!-- config.html -->
+{% extends "base.html" %}
+
+{% block title %}Configuración{% endblock %}
+
+{% block header %}
+    <header class="sticky-header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/">Volver atrás</a>
+                </div>
+                <span class="navbar-text">Bienvenido, {{ admin_nickname }}</span>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+        </nav>        
+    </header>
+{% endblock %}
+
+{% block main %}
+<div class="col-md-6 offset-md-3">
+    <h1 class="text-center">Configuración de la cuenta</h1>
+    <div class="card card-body text-white mt-2" style="background-color: #202020;">
+        <div class="row">
+            <div class="col pr-1">
+                <a href="/change_password" class="btn btn-primary w-100">Cambiar contraseña</a>
+            </div>
+            <div class="col pl-1">
+                <a href="/confirm_delete_house" class="btn btn-danger w-100">Eliminar cuenta</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        sessionStorage.setItem('admin_id', '{{ session["admin_id"] }}');
+        sessionStorage.setItem('admin_nickname', '{{ session["admin_nickname"] }}');
+    </script>
+{% endblock %}

@@ -96,7 +96,7 @@ def change_password():
         update_password(admin.id, hashed_password)
 
         flash('La contraseña ha sido cambiada con éxito', 'success')
-        return redirect(url_for('dashboard'))
+        return logout()
     else:
         flash('La contraseña antigua es incorrecta', 'danger')
         return redirect(url_for('change_password'))

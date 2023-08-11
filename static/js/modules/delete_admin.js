@@ -26,14 +26,14 @@ export function deleteAdminButtonEvent() {
             return;
         }
 
-        // Si la contraseña es correcta, pregúntale al usuario si realmente quiere eliminar la casa
+        // Si la contraseña es correcta, pregúntale al usuario si realmente quiere eliminar su cuenta
         const deleteConfirmed = confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se podrá deshacer.');
         
         if (!deleteConfirmed) {
             return;
         }
 
-        // Finalmente, realiza la petición para eliminar la casa
+        // Finalmente, realiza la petición para eliminar la cuenta
         const deleteResponse = await fetch(`/auth/delete/${adminId}`, {
             method: 'DELETE'
         });

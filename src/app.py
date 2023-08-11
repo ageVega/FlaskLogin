@@ -1,5 +1,5 @@
 # app.py
-from .login import login_manager, admin_blueprint
+from .auth import login_manager, admin_blueprint
 from os import environ
 from dotenv import load_dotenv
 from flask import Flask, session, render_template, redirect, url_for

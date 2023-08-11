@@ -1,6 +1,8 @@
 # login.py
-from .admin import get_admin_by_id, get_admin_by_nickname, create_admin, delete_admin, update_password
-from flask import Blueprint, request, redirect, url_for, render_template, flash, session
+from .connection import get_connection
+from psycopg2 import extras
+from .admin import get_admin_by_id, get_admin_by_nickname, create_admin, update_password
+from flask import Blueprint, request, redirect, url_for, render_template, flash, session, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -59,12 +61,12 @@ def login():
     else:
         return render_template('login.html')
 
-
 @admin_blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @admin_blueprint.route('/change_password', methods=['POST'])
 @login_required
@@ -101,17 +103,40 @@ def change_password():
         flash('La contraseña antigua es incorrecta', 'danger')
         return redirect(url_for('change_password'))
 
-@admin_blueprint.route('/delete', methods=['GET', 'POST'])
+@admin_blueprint.route('/confirm_password/<int:admin_id>', methods=['POST'])
 @login_required
-def delete_admin():
-    if request.method == 'POST':
-        admin_id = current_user.get_id()
-        error = delete_admin(admin_id)
-        if error:
-            flash('Error al eliminar el administrador', 'danger')
-            return redirect(url_for('delete'))
-        
-        logout_user()
-        return redirect(url_for('home'))
+def confirm_password(admin_id):
+    if admin_id != current_user.id:
+        return jsonify({'message': 'No puedes confirmar la contraseña de otro administrador'}), 400
+
+    password = request.json.get('password')
     
-    return render_template('delete_admin.html')
+    admin = get_admin_by_id(admin_id)
+    if admin is None:
+        return jsonify({'message': 'Este administrador no existe'}), 400
+
+    if not check_password_hash(admin.password, password):
+        return jsonify({'message': 'Contraseña incorrecta'}), 400
+
+    return jsonify({'message': 'Contraseña correcta'}), 200
+
+@admin_blueprint.route('/delete/<int:admin_id>', methods=['DELETE'])
+@login_required
+def delete_admin(admin_id):
+    if admin_id != current_user.id:
+        return jsonify({'message': 'No puedes eliminar a otro administrador'}), 400
+
+    conn = get_connection()
+    cursor = conn.cursor(cursor_factory=extras.RealDictCursor)
+    try:
+        cursor.execute("DELETE FROM admins WHERE id = %s", (admin_id,))
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'message': 'Error al eliminar al administrador'}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+    logout_user()
+    return jsonify({'message': 'Admin eliminado correctamente'}), 200

@@ -1,7 +1,5 @@
 # login.py
-from .connection import get_connection
-from psycopg2 import extras
-from .admin import get_admin_by_id, get_admin_by_nickname, create_admin, update_password
+from .admin import get_admin_by_id, get_admin_by_nickname, create_admin, update_password, erase_admin
 from flask import Blueprint, request, redirect, url_for, render_template, flash, session, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -127,17 +125,9 @@ def delete_admin(admin_id):
     if admin_id != current_user.id:
         return jsonify({'message': 'No puedes eliminar a otro administrador'}), 400
 
-    conn = get_connection()
-    cursor = conn.cursor(cursor_factory=extras.RealDictCursor)
-    try:
-        cursor.execute("DELETE FROM admins WHERE id = %s", (admin_id,))
-        conn.commit()
-    except Exception as e:
-        conn.rollback()
+    success = erase_admin(admin_id)
+    if not success:
         return jsonify({'message': 'Error al eliminar al administrador'}), 500
-    finally:
-        cursor.close()
-        conn.close()
 
     logout_user()
     return jsonify({'message': 'Admin eliminado correctamente'}), 200

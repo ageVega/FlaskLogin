@@ -50,7 +50,7 @@ file_paths = [
     os.path.join(script_dir, os.pardir, 'src', 'app.py'),
     os.path.join(script_dir, os.pardir, 'src', 'connection.py'),
     os.path.join(script_dir, os.pardir, 'src', 'admin.py'),
-    os.path.join(script_dir, os.pardir, 'src', 'login.py'),
+    os.path.join(script_dir, os.pardir, 'src', 'auth.py'),
     os.path.join(script_dir, os.pardir, 'templates', 'base.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'home.html'),
     os.path.join(script_dir, os.pardir, 'templates', 'register.html'),

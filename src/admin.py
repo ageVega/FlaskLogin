@@ -52,3 +52,12 @@ def update_password(admin_id, new_password):
         return False
     
     return True
+
+def erase_admin(admin_id):
+    try:
+        execute_query('DELETE FROM admins WHERE id = %s', (admin_id,))
+    except Exception as e:
+        print("Error al eliminar al administrador: ", str(e))
+        return False
+    
+    return True

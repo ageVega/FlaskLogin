@@ -14,20 +14,15 @@ $ python -m src.app
 
 ```bash
 $ python --version
-Python 3.10.4
-```
-
-```bash
 $ pip --version
-pip 22.3.1 from C:\Users\ageve\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)
 ```
 
 - Si Python y pip no están instalados, puedes instalar pip con los siguientes comandos:
 
 ```bash
 sudo apt update
-
-sudo apt install python3-pip
+sudo apt install python3-pip -y
+echo "alias python='python3'" >> ~/.bashrc && source ~/.bashrc
 
 export PYTHONPATH="${PYTHONPATH}:/ruta/a/raiz"
 ```
